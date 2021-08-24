@@ -6,8 +6,14 @@ use std::io::Write;
 pub fn main() {
     let contents = read_to_string("details.csv").unwrap();
     let products: HashMap<i32, (&str, f64)> = contents.lines()
-        .map(|s| s.split(","))
-        .map(|mut i| (i.next().unwrap().parse().unwrap(), (i.next().unwrap(), i.next().unwrap().parse().unwrap()))).collect();
+    .map(|line| {
+        let items: Vec<_> = line.splitn(4, ',').collect();
+        (items[0].parse().unwrap(), (
+            items[1],
+            items[2].parse().unwrap(),
+        ))
+    })
+    .collect();
 
 
     let mut output = String::new();
