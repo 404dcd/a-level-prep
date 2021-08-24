@@ -1,5 +1,6 @@
 use std::env;
 mod hangman;
+mod gtin1;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -7,6 +8,7 @@ fn main() {
 
     match problem.as_ref() {
         "hangman" => hangman::main(),
+        "gtin1" => gtin1::main(),
         _ => println!("Unknown problem '{}'", problem),
     }
 }
