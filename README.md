@@ -19,3 +19,6 @@ The former provides a GUI for a student to submit their details, and the latter 
 
 The database is stored in memory, and is not persistent. Just change the path in the `Rocket.toml` file to make it persistent,
 but you may have to update the SQL in `init_db`.
+
+### Note
+The gtin3 program creates and writes a file called `orders.csv`. It does not write anything to stdout.
