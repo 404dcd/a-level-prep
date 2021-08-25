@@ -14,6 +14,8 @@ To mitigate this problem (if you're not interested in running the server), just 
 Make sure to run from the cargo root, or else it can't find the input files.
 
 ### Server
+![image](https://user-images.githubusercontent.com/46684921/130854818-839c5af8-4d96-4abb-89dd-12f3b3921abe.png)
+
 The extension task runs a web server with two routes of interest: `/` and `/api/list`.
 The former provides a GUI for a student to submit their details, and the latter an API which provides CSV data for all users in the database.
 
