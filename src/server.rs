@@ -42,11 +42,11 @@ async fn list_users(db: Db) -> String {
         .await
         .unwrap();
 
-    let mut ret = String::from("id,first name,last name,address,address 2,city,post code\n");
+    let mut ret = String::from("id|first name|last name|address|address 2|city|post code\n");
     for row in data {
         ret.push_str(
             format!(
-                "{},{},{},{},{},{},{}\n",
+                "{}|{}|{}|{}|{}|{}|{}\n",
                 row.0, row.1, row.2, row.3, row.4, row.5, row.6
             )
             .as_str(),
@@ -63,12 +63,12 @@ fn index() -> Template {
 
 #[post("/", data = "<data>")]
 async fn save(db: Db, data: Form<Details>) -> &'static str {
-    let p1 = data.input_first.clone();
-    let p2 = data.input_last.clone();
-    let p3 = data.input_address.clone();
-    let p4 = data.input_address2.clone();
-    let p5 = data.input_city.clone();
-    let p6 = data.input_post.clone();
+    let p1 = data.input_first.clone().replace("|", "");
+    let p2 = data.input_last.clone().replace("|", "");
+    let p3 = data.input_address.clone().replace("|", "");
+    let p4 = data.input_address2.clone().replace("|", "");
+    let p5 = data.input_city.clone().replace("|", "");
+    let p6 = data.input_post.clone().replace("|", "");
 
     if let Ok(_) = db.run(move |conn| conn.execute("INSERT INTO students (first, last, address, address2, city, post) VALUES (?1, ?2, ?3, ?4, ?5, ?6)",
         params![p1, p2, p3, p4, p5, p6])).await {
