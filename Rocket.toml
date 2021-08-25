@@ -1,0 +1,5 @@
+[debug]
+log_level = "debug"
+
+[global.databases]
+sqlite_logs = { url = ":memory:" }

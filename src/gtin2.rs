@@ -5,21 +5,23 @@ use std::io::Write;
 
 pub fn main() {
     let contents = read_to_string("details.csv").unwrap();
-    let products: HashMap<i32, (&str, f64)> = contents.lines()
-    .map(|line| {
-        let items: Vec<_> = line.splitn(4, ',').collect();
-        (items[0].parse().unwrap(), (
-            items[1],
-            items[2].parse().unwrap(),
-        ))
-    })
-    .collect();
-
+    let products: HashMap<i32, (&str, f64)> = contents
+        .lines()
+        .map(|line| {
+            let items: Vec<_> = line.splitn(4, ',').collect();
+            (
+                items[0].parse().unwrap(),
+                (items[1], items[2].parse().unwrap()),
+            )
+        })
+        .collect();
 
     let mut output = String::new();
     let mut cost = 0.0;
-    println!("Enter one product per line. Enter the GTIN-8 code, then a
-    space, then the quantity. Leave a blank line to stop taking input.");
+    println!(
+        "Enter one product per line. Enter the GTIN-8 code, then a
+    space, then the quantity. Leave a blank line to stop taking input."
+    );
     loop {
         print!("> ");
         io::stdout().flush().unwrap();
@@ -46,8 +48,8 @@ pub fn main() {
                     output.push_str(vectorised[0]);
                     output.push_str("\tproduct not found\n");
                 }
-            },
-            _ => println!("invalid input: please enter 2 values")
+            }
+            _ => println!("invalid input: please enter 2 values"),
         }
     }
     println!("{}", output);
